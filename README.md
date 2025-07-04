@@ -30,7 +30,7 @@ To start the development server with hot module replacement:
 npm run dev
 ```
 
-This will start the app at `http://localhost:8080` (default Vite port). Open this URL in your browser to view the app.
+This will start the app at `http://localhost:8080` . Open this URL in your browser to view the app.
 
 
 
