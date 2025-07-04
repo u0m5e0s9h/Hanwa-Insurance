@@ -1,4 +1,4 @@
-# vite_react_shadcn_ts
+# Hanwa-Insurance
 
 This project is a React application built with Vite, TypeScript, and Tailwind CSS. It uses various Radix UI components and other modern React libraries.
 
