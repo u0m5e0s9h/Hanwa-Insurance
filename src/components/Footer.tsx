@@ -4,11 +4,11 @@ import NotFound from "@/pages/NotFound";
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-[#E6E6E6] pt-[10px] pb-[40px]">
-      <div className="max-w-5xl mx-auto flex flex-col items-center text-center gap-10 w-full px-4">
+    <footer className="w-full max-w-[1920px] min-h-[212px] bg-white border-t border-[#E6E6E6] pt-[10px] pb-[40px]">
+      <div className="max-w-5xl mx-auto flex flex-col items-center text-center gap-[5px] w-full px-4">
 
-        {/* Contact Info */}
-        <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-sm text-gray-600">
+       
+        <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-sm text-gray-600 h-[20px]">
           <span>대표전화 02-3395-7180</span>
           <span>|</span>
           <span>다이렉트 1588-8282</span>
@@ -34,7 +34,7 @@ const Footer = () => {
             <Link
               key={label}
               to="/not-found"
-              className="border border-gray-300 text-xs px-3 py-1 rounded bg-white hover:bg-gray-100 transition"
+              className="h-[18px] px-3 flex items-center border border-gray-300 text-xs rounded bg-white hover:bg-gray-100 transition"
             >
               {label}
             </Link>
@@ -43,18 +43,18 @@ const Footer = () => {
 
         {/* Company Info */}
         <div className="text-xs text-gray-500 leading-relaxed text-center space-y-1 max-w-[90%]">
-          <p>
+          <p className="h-[18px] overflow:hidden">
             한화손해보험 주식회사 대표이사 나재철 | 사업자등록번호 116-81-46445 |
             서울시 영등포구 여의대로 56 (여의도동 23-5)
           </p>
-          <p>
+          <p className="h-[18px] overflow:hidden">
             한화손해보험 관악사업소 : 사업소장 정태영 | 관악사업소 주소 : 서울시 관악구 남부순환로
             1796, 10층(삼호빌딩)
           </p>
         </div>
 
         {/* Logos */}
-        <div className="flex flex-wrap justify-center items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-[5px]">
           <img src="/logos/image27.png" alt="KNDA" className="h-6" />
           <img src="/logos/image28.png" alt="ISMS" className="h-6" />
           <img src="/logos/image29.png" alt="WA" className="h-6" />
