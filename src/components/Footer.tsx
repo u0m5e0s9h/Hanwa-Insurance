@@ -38,8 +38,8 @@ const Footer = () => {
           {/* Contact  and Company Details */}
           <div className="text-xs text-gray-600 space-y-1 text-center">
             <p className="text-base h-[29px]  text-center mx-auto mb-10">
-              <span className="font-bold text-4xl  text-gray-800">고객상담센터 </span>
-              <span className="text-orange-500 text-4xl font-semibold">02-3395-7180</span>
+              <span className="font-bold text-xl sm:text-2xl md:text-3x  text-gray-800">고객상담센터 </span>
+              <span className="text-orange-500 text-xl sm:text-2xl md:text-3x font-semibold">02-3395-7180</span>
             </p>
 
 
