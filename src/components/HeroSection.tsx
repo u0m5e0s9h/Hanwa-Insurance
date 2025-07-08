@@ -8,7 +8,7 @@ const HeroSection = () => {
           나눔의 행복 소개 (특약)
         </div>
 
-        <div className="mt-4 bg-white overflow-hidden shadow-lg relative w-full space-y-4">
+        <div className="mt-4 bg-white overflow-hidden  relative w-full space-y-4">
          
           <img
             src="/hero-image1.png"
