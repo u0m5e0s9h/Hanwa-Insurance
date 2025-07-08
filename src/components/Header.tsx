@@ -83,7 +83,7 @@ const Header = () => {
             <img
               src="/logo.png"
               alt="한화 로고"
-              className="w-10 h-10 rounded-full object-cover"
+              className="w-10 h-10  object-cover"
             />
             <div>
               <h1 className="text-xl font-bold text-gray-800">한화손해보험</h1>
@@ -106,7 +106,7 @@ const Header = () => {
                   <ChevronDown size={16} />
                 </button>
                 {openDropdown === nav.label && (
-                  <div className="absolute top-full left-0 bg-white border shadow-lg rounded-lg p-3 space-y-2 z-50 w-64">
+                  <div className="absolute top-full left-0 bg-white border shadow-lg  p-3 space-y-2 z-50 w-64">
                     {nav.items.map((item, idx) => (
                       <Button
                         key={idx}

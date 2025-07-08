@@ -4,7 +4,7 @@ const HeroSection = () => {
     <section className="bg-white py-16 px-4">
       <div className="max-w-[1000px] mx-auto w-full">
 
-        <div className="mt-16 text-orange-500 text-lg font-semibold mb-4 px-2">
+        <div className=" text-orange-500 text-lg font-semibold  mb-4 px-2">
           나눔의 행복 소개 (특약)
         </div>
 
@@ -13,14 +13,14 @@ const HeroSection = () => {
           <img
             src="/hero-image1.png"
             alt="나눔의 행복"
-            className="w-full h-auto object-cover rounded"
+            className="w-full h-auto object-cover "
           />
 
          
           <img
             src="/hero-image2.png"
             alt="나눔의 행복"
-            className="w-full h-auto object-contain rounded"
+            className="w-full h-auto object-contain"
           />
         </div>
       </div>
