@@ -7,9 +7,8 @@ const ServiceIntro = () => {
   return (
     <section className="bg-white px-4 pt-2 pb-6">
       <div className="max-w-[1000px] mx-auto space-y-8">
-        <div className="bg-white border border-gray-200 shadow-md px-4 py-5 flex flex-row items-center justify-between gap-4 flex-wrap md:flex-nowrap">
+        <div className="bg-white border border-gray-200  px-4 py-5 flex flex-row items-center justify-between gap-4 flex-wrap md:flex-nowrap">
           
-          {/* Image */}
           <div className="flex-1 min-w-[150px] max-w-[70%]">
             <img
               src="/service.png"
@@ -18,7 +17,6 @@ const ServiceIntro = () => {
             />
           </div>
 
-          {/* Button  */}
           <div className="flex-1 min-w-[150px] max-w-[30%]">
             <button
               onClick={() => setIsModalOpen(true)}
