@@ -43,7 +43,7 @@ const ProcessFlow = () => {
         </div>
 
       
-        <div className="bg-white p-6 shadow-md flex justify-center mb-6">
+        <div className="bg-white p-6  flex justify-center mb-6">
           <img
             src={imageSources[activeType]}
             alt={activeType}
@@ -56,7 +56,7 @@ const ProcessFlow = () => {
           {additionalImages.map((src, index) => (
             <div
               key={index}
-              className="bg-white p-6 pb-16 shadow-md flex justify-center"
+              className="bg-white p-6 pb-16  flex justify-center"
             >
               <img
                 src={src}
