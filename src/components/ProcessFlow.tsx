@@ -29,7 +29,7 @@ const ProcessFlow = () => {
       <div className="max-w-5xl mx-auto">
 
         
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
+        <div className="grid md:grid-cols-4 px-8 ">
           {buttonLabels.map((label) => (
             <button
               key={label}
