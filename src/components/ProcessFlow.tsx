@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 const ProcessFlow = () => {
@@ -26,13 +27,13 @@ const ProcessFlow = () => {
   return (
     <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-5xl mx-auto">
-        
-        <div className="flex justify-between  mb-8 overflow-x-auto">
+
+        <div className="flex justify-between mb-8 w-full">
           {buttonLabels.map((label) => (
             <button
               key={label}
               onClick={() => setActiveType(label)}
-              className={`w-1/4 px-2 py-2 h-[62px] text-xs sm:text-sm font-medium  transition-colors text-center
+              className={`flex-1 text-xs sm:text-sm h-[58px] px-1 py-2 font-medium transition-colors text-center
                 ${activeType === label
                   ? "bg-orange-500 text-white"
                   : "bg-white text-black border border-gray-300 hover:bg-orange-100"}`}
@@ -42,8 +43,7 @@ const ProcessFlow = () => {
           ))}
         </div>
 
-      
-        <div className="bg-white p-6  flex justify-center mb-6">
+        <div className="bg-white p-6 shadow-md flex justify-center mb-6">
           <img
             src={imageSources[activeType]}
             alt={activeType}
@@ -51,12 +51,11 @@ const ProcessFlow = () => {
           />
         </div>
 
-        
         <div className="space-y-6">
           {additionalImages.map((src, index) => (
             <div
               key={index}
-              className="bg-white p-6 pb-16  flex justify-center"
+              className="bg-white p-6 pb-16 shadow-md flex justify-center"
             >
               <img
                 src={src}
@@ -66,7 +65,6 @@ const ProcessFlow = () => {
             </div>
           ))}
         </div>
-        
       </div>
     </section>
   );
