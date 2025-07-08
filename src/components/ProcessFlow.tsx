@@ -32,7 +32,7 @@ const ProcessFlow = () => {
             <button
               key={label}
               onClick={() => setActiveType(label)}
-              className={`w-1/4 px-2 py-2 text-xs sm:text-sm font-medium  transition-colors text-center
+              className={`w-1/4 px-2 py-2 h-[62px] text-xs sm:text-sm font-medium  transition-colors text-center
                 ${activeType === label
                   ? "bg-orange-500 text-white"
                   : "bg-white text-black border border-gray-300 hover:bg-orange-100"}`}
