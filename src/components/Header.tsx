@@ -1,4 +1,4 @@
-import {  Phone,Mail,Home,Search,Menu,X,ChevronDown,} from "lucide-react";
+import { Home, Search, Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect, useRef } from "react";
@@ -8,41 +8,10 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [zoom, setZoom] = useState(100);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const mobileDropdownRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    document.documentElement.style.fontSize = `${zoom}%`;
-  }, [zoom]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        !Object.values(dropdownRefs.current).some((ref) =>
-          ref?.contains(event.target as Node)
-        )
-      ) {
-        setOpenDropdown(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate("/not-found");
-  };
-
-  const increaseZoom = () => {
-    if (zoom < 200) setZoom((prev) => prev + 10);
-  };
-
-  const decreaseZoom = () => {
-    if (zoom > 50) setZoom((prev) => prev - 10);
-  };
 
   const navItems = [
     {
@@ -69,22 +38,121 @@ const Header = () => {
     },
   ];
 
-  const handleNavigateToNotFound = () => {
+  const mobileDropdownItems = [
+    "나눔의행복(특약) 소개",
+    "참여기업",
+    "납품기업",
+  ];
+
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${zoom}%`;
+  }, [zoom]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        !Object.values(dropdownRefs.current).some((ref) =>
+          ref?.contains(event.target as Node)
+        )
+      ) {
+        setOpenDropdown(null);
+      }
+
+      if (
+        mobileDropdownRef.current &&
+        !mobileDropdownRef.current.contains(event.target as Node)
+      ) {
+        setMobileDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
     navigate("/not-found");
+  };
+
+  const handleNavigateToNotFound = () => {
+    setMobileDropdownOpen(false);
+    setTimeout(() => {
+      navigate("/not-found");
+    }, 100);
+  };
+
+  const increaseZoom = () => {
+    if (zoom < 200) setZoom((prev) => prev + 10);
+  };
+
+  const decreaseZoom = () => {
+    if (zoom > 50) setZoom((prev) => prev - 10);
   };
 
   return (
     <header className="w-full text-base">
-      {/* Top Bar */}
-      <div className="bg-white shadow-sm py-4 px-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          {/* Logo */}
+      
+      <div className="lg:hidden block bg-white shadow-sm">
+        {/* Top Bar */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 relative">
+         
+          <Menu
+            className="w-6 h-6 text-gray-700 cursor-pointer"
+            onClick={() => alert("Open mobile sidebar")}
+          />
+
+          
+          <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center space-x-2">
+            <img src="/logo.png" alt="logo" className="w-8 h-8 object-contain" />
+            <div>
+              <p className="text-sm font-bold text-gray-800">한화손해보험</p>
+              <p className="text-xs text-gray-500">관악지사</p>
+            </div>
+          </div>
+
+          
+          <Search
+            className="w-5 h-5 text-gray-600 ml-auto cursor-pointer"
+            onClick={handleNavigateToNotFound}
+          />
+        </div>
+
+        {/* Second Bar  */}
+        <div className="relative border-t border-gray-100 px-4 py-2 bg-gray-50 text-center">
+          <button
+            onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+            className="text-sm font-medium text-gray-700 flex items-center justify-center mx-auto"
+          >
+            <span>나눔의행복</span>
+            <ChevronDown className="w-4 h-4 ml-1" />
+          </button>
+
+          {mobileDropdownOpen && (
+            <div
+              ref={mobileDropdownRef}
+              className="absolute left-0 right-0 bg-white shadow-md mt-2 px-4 py-2 z-50"
+            >
+              {mobileDropdownItems.map((item) => (
+                <button
+                  key={item}
+                  onClick={handleNavigateToNotFound}
+                  className="w-full text-center text-sm text-gray-700 hover:text-orange-500 px-2 py-2"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/*  Desktop Header */}
+      <div className="hidden lg:block bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
+          
           <div className="flex items-center space-x-3">
-            <img
-              src="/logo.png"
-              alt="한화 로고"
-              className="w-10 h-10  object-cover"
-            />
+            <img src="/logo.png" alt="로고" className="w-10 h-10 object-cover" />
             <div>
               <h1 className="text-xl font-bold text-gray-800">한화손해보험</h1>
               <p className="text-sm text-gray-600">관악지사</p>
@@ -92,7 +160,7 @@ const Header = () => {
           </div>
 
           
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="flex items-center space-x-8">
             {navItems.map((nav) => (
               <div
                 key={nav.label}
@@ -106,12 +174,12 @@ const Header = () => {
                   <ChevronDown size={16} />
                 </button>
                 {openDropdown === nav.label && (
-                  <div className="absolute top-full left-0 bg-white border shadow-lg  p-3 space-y-2 z-50 w-64">
-                    {nav.items.map((item, idx) => (
+                  <div className="absolute top-full left-0 bg-white border shadow-lg p-3 space-y-2 z-50 w-64">
+                    {nav.items.map((item) => (
                       <Button
-                        key={idx}
+                        key={item}
                         variant="ghost"
-                        className="w-full justify-start hover:text-orange-500"
+                        className="w-full justify-start text-sm text-gray-700 hover:text-orange-500"
                         onClick={handleNavigateToNotFound}
                       >
                         {item}
@@ -124,7 +192,7 @@ const Header = () => {
           </nav>
 
           
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="flex items-center space-x-4">
             <form onSubmit={handleSearch} className="flex items-center">
               <div className="relative">
                 <Input
@@ -149,95 +217,36 @@ const Header = () => {
               로그인
             </Button>
           </div>
-
-          
-          <div className="lg:hidden flex items-center space-x-3">
-            <Search
-              className="w-5 h-5 text-gray-600 cursor-pointer"
-              onClick={handleNavigateToNotFound}
-            />
-            <Menu
-              className="w-6 h-6 text-gray-600 cursor-pointer"
-              onClick={() => setMobileMenuOpen(true)}
-            />
-          </div>
         </div>
-      </div>
 
-    
-      <div className="bg-gray-800 text-white py-2 px-4">
-        <div className="max-w-[1327px] mx-auto flex justify-between items-center text-sm flex-wrap">
-          <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-2">
-              <Home size={16} />
-              <span>홈</span>
+        
+        <div className="bg-gray-800 text-white py-2 px-4">
+          <div className="max-w-[1327px] mx-auto flex justify-between items-center text-sm flex-wrap">
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-2">
+                <Home size={16} />
+                <span>홈</span>
+              </div>
+              <span>나눔의 행복 소개 (시각 대비용)</span>
             </div>
-            <span>나눔의 행복 소개 (시각 대비용)</span>
-          </div>
-          <div className="flex items-center space-x-2 border border-white rounded px-2 py-1 mt-2 sm:mt-0">
-            <span>{zoom}%</span>
-            <button
-              onClick={increaseZoom}
-              className="hover:text-orange-400 font-bold text-lg"
-            >
-              +
-            </button>
-            <button
-              onClick={decreaseZoom}
-              className="hover:text-orange-400 font-bold text-lg"
-            >
-              −
-            </button>
-          </div>
-        </div>
-      </div>
-
-      
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
-          <div className="fixed top-0 right-0 w-64 h-full bg-white shadow-lg p-4 overflow-y-auto">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-800">메뉴</h2>
-              <X
-                className="w-6 h-6 text-gray-600 cursor-pointer"
-                onClick={() => setMobileMenuOpen(false)}
-              />
-            </div>
-            <div className="space-y-4">
-              {navItems.map((nav) => (
-                <div key={nav.label}>
-                  <h3 className="text-gray-700 font-medium mb-2">
-                    {nav.label}
-                  </h3>
-                  <div className="space-y-1 pl-2">
-                    {nav.items.map((item, idx) => (
-                      <Button
-                        key={idx}
-                        variant="ghost"
-                        className="w-full justify-start text-sm text-gray-600 hover:text-orange-500"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          handleNavigateToNotFound();
-                        }}
-                      >
-                        {item}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button
-                className="bg-orange-500 text-white w-full py-2 hover:bg-orange-600"
-                onClick={handleNavigateToNotFound}
+            <div className="flex items-center space-x-2 border border-white rounded px-2 py-1 mt-2 sm:mt-0">
+              <span>{zoom}%</span>
+              <button
+                onClick={increaseZoom}
+                className="hover:text-orange-400 font-bold text-lg"
               >
-                로그인
-              </Button>
+                +
+              </button>
+              <button
+                onClick={decreaseZoom}
+                className="hover:text-orange-400 font-bold text-lg"
+              >
+                −
+              </button>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };
